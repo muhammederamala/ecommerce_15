@@ -22,7 +22,7 @@ function App() {
   return (
     <div>
       <Header />
-      <main>
+      <main className='py-5'>
         <Container>
           <RouterProvider router = {router} />
         </Container>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Card, ListGroupItem } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom';
 
 
@@ -49,7 +49,9 @@ function ProductScreen() {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <Row>
-                                <Col>Price:</Col>
+                                <Col>
+                                    Price:
+                                </Col>
                                 <Col>
                                     <strong>${product.price}</strong>
                                 </Col>
@@ -62,6 +64,9 @@ function ProductScreen() {
                                     {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                                 </Col>
                             </Row>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Button className='btn-block' disabled = {product.countInStock == 0} type='button'>Add to Cart</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
