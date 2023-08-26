@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Link, redirect } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,32 +12,44 @@ import FormContainer from '../components/FormContainer'
 
 
 
-function LoginScreen({location, history}) {
+function LoginScreen({history}) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const dispatch = useDispatch()
+
+
+    //split the portion after the redirect = ?
     const url = new URL(window.location.href);
     const search = url.search;
-
-
-    const redirect = location.search ? location.search.split('=')[1] : '/';
-
-    
-
+    const redirect = search ? search.split('=')[1] : '/'
     // const redirect = new URLSearchParams(window.locatin.search) ? URLSearchParams(window.locatin.search).split('=')[1] : '/'
+
+    // User login is a userLoginReduces passed to store.
+    const userLogin = useSelector(state => state.userLogin)
+    const {error, loading, userInfo} = userLogin
+
+    const navigate = useNavigate()
+
+    useEffect(()=> {
+        if(userInfo){
+            navigate(redirect)
+        }
+    },[userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('Submitted')
+        dispatch(login(email,password)) // think login is the cart action export.
     }
 
 
   return (
     <FormContainer>
       <h1>Sign in</h1>
-
-        <Form onClick={submitHandler}>
+      {error && <Message variant='danger' >{error}</Message>}
+      {loading && <Loader />}
+        <Form onSubmit={submitHandler}>
             <Form.Group controlId='email' className="mb-3">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -48,7 +60,7 @@ function LoginScreen({location, history}) {
                 ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='passsword' className="mb-3">
+            <Form.Group controlId='passsword' className="mb-4">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                 type='password'
