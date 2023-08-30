@@ -93,6 +93,7 @@ function RegisterScreen({history}) {
             required
             >
             </Form.Control>
+            
         </Form.Group>
 
         <Form.Group controlId='passswordConfirm' className="mb-4">
