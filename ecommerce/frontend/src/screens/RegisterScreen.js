@@ -46,7 +46,7 @@ function RegisterScreen({history}) {
         if(password != ConfirmPassword){
             setMessage('Passwords do not match')
         }else{
-            dispatch(register(name, email,password)) // think register is the cart action export.
+            dispatch(register(name, email,password)) // register is the cart action export.
         }
     }
 
