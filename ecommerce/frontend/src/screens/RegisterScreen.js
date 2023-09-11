@@ -111,6 +111,7 @@ function RegisterScreen({history}) {
         <Button type='submit' variant='primary' className="mb-3">
             Register
         </Button>
+      </Form>
 
         <Row className='py-3'>
             <Col>
@@ -121,7 +122,7 @@ function RegisterScreen({history}) {
             </Col>
         </Row>
 
-      </Form>
+      
     </FormContainer>
   )
 }
