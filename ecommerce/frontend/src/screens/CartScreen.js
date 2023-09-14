@@ -17,7 +17,7 @@ function CartScreen(location) {
 
   const { id } = useParams()
   const parameter = new URLSearchParams(window.location.search)
-  const qty = parameter.get("qty") ?  parameter.get("qty") : 1
+  const qty = parameter.get("qty") ?  parseInt(parameter.get("qty")) : 1
 
   const dispatch =  useDispatch()
 
@@ -39,7 +39,7 @@ function CartScreen(location) {
   //checkout function.
   const navigate = useNavigate()
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    navigate('/shipping')
   }
 
   return (
